@@ -9,7 +9,7 @@
 | 파일 | 설명 |
 |------|------|
 | `index.html` | 페이지 구조 (Hero · About · Skills · Projects · Contact) |
-| `styles.css` | 손글씨 노트 테마(줄노트 + 볼펜) · 반응형 레이아웃 · 애니메이션 |
+| `styles.css` | 옥스포드 노트 테마(밝은 그리드 종이 + 손글씨) · 반응형 레이아웃 · 애니메이션 |
 | `script.js` | 네비게이션 · 모바일 메뉴 · 스크롤 리빌 |
 | `fonts/` | 자체 호스팅 폰트 tvN 즐거운이야기 (WOFF2, Light/Medium/Bold) |
 
@@ -25,7 +25,7 @@
 - **프로젝트** — `.project-card` 3개 (제목·설명·태그·링크 `href="#"`)
 - **연락처** — 이메일(`mailto:`), GitHub/LinkedIn/Blog 링크
 
-색상·질감은 `styles.css` 상단 `:root`의 `--paper`(종이색), `--ink`/`--ink-blue`/`--ink-red`(볼펜 잉크), `--rule`(괘선), `--highlight`(형광펜) 값으로 조정합니다.
+색상·질감은 `styles.css` 상단 `:root`의 `--paper`(종이색), `--line`(카드 테두리), `--ink`/`--ink-blue`/`--ink-red`(볼펜 잉크), `--rule`(그리드 선), `--highlight`(형광펜) 값으로 조정합니다.
 
 ## 로컬 미리보기
 
