@@ -9,7 +9,7 @@
 | 파일 | 설명 |
 |------|------|
 | `index.html` | 페이지 구조 (Hero · About · Skills · Projects · Contact) |
-| `styles.css` | 다크 모던 테마 · 반응형 레이아웃 · 애니메이션 |
+| `styles.css` | 손글씨 노트 테마(줄노트 + 볼펜) · 반응형 레이아웃 · 애니메이션 |
 | `script.js` | 네비게이션 · 모바일 메뉴 · 스크롤 리빌 |
 
 ## 커스터마이징 가이드
@@ -22,7 +22,7 @@
 - **프로젝트** — `.project-card` 3개 (제목·설명·태그·링크 `href="#"`)
 - **연락처** — 이메일(`mailto:`), GitHub/LinkedIn/Blog 링크
 
-색상 테마는 `styles.css` 상단 `:root`의 `--accent`, `--accent-2` 값만 바꾸면 전체가 함께 바뀝니다.
+색상·질감은 `styles.css` 상단 `:root`의 `--paper`(종이색), `--ink`/`--ink-blue`/`--ink-red`(볼펜 잉크), `--rule`(괘선), `--highlight`(형광펜) 값으로 조정합니다.
 
 ## 로컬 미리보기
 
