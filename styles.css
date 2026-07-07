@@ -14,7 +14,7 @@
   --radius-alt: 15px 225px 15px 255px / 255px 15px 225px 15px;
   --maxw: 1120px;
   --font: 'Gaegu', 'Caveat', system-ui, sans-serif;
-  --display: 'Nanum Pen Script', 'Caveat', cursive;
+  --display: 'Gaegu', 'Caveat', cursive;
   --hand: 'Caveat', 'Gaegu', cursive;
   --mono: 'Courier New', ui-monospace, monospace;
   /* hand-drawn red squiggle underline */
@@ -116,9 +116,9 @@ main { width: 100%; }
 }
 .section-head h2, .contact h2 {
   font-family: var(--display);
-  font-size: clamp(2.4rem, 5vw, 3.4rem);
-  font-weight: 400;
-  line-height: 1;
+  font-size: clamp(2rem, 4.4vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.05;
   color: var(--ink);
   position: relative;
   padding-bottom: 10px;
@@ -156,9 +156,9 @@ main { width: 100%; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
 .hero-title {
   font-family: var(--display);
-  font-size: clamp(3rem, 8.5vw, 5.6rem);
-  font-weight: 400;
-  line-height: 1.05;
+  font-size: clamp(2.5rem, 6.8vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.12;
   color: var(--ink);
   margin-bottom: 22px;
 }
@@ -372,6 +372,16 @@ main { width: 100%; }
   font-weight: 600;
   font-size: 1.2rem;
 }
+
+/* ===== Gaegu display headings — bold for hierarchy & legibility ===== */
+.nav-logo { font-weight: 700; }
+.stat strong { font-weight: 700; font-size: 2.2rem; }
+.skill-card h3 { font-weight: 700; font-size: 1.5rem; }
+.exp-head h3 { font-weight: 700; font-size: 1.65rem; }
+.project-card h3 { font-weight: 700; font-size: 1.6rem; }
+.activity-card h3 { font-weight: 700; font-size: 1.45rem; }
+.edu-head h3 { font-weight: 700; font-size: 1.75rem; }
+.edu-sub { font-weight: 700; font-size: 1.5rem; }
 
 /* ===== Reveal animation ===== */
 [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
