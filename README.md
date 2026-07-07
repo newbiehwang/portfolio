@@ -11,6 +11,9 @@
 | `index.html` | 페이지 구조 (Hero · About · Skills · Projects · Contact) |
 | `styles.css` | 손글씨 노트 테마(줄노트 + 볼펜) · 반응형 레이아웃 · 애니메이션 |
 | `script.js` | 네비게이션 · 모바일 메뉴 · 스크롤 리빌 |
+| `fonts/` | 자체 호스팅 폰트 tvN 즐거운이야기 (WOFF2, Light/Medium/Bold) |
+
+> 폰트: [tvN 즐거운이야기](https://tvn10font.tving.com/) (CJ ENM). OTF를 WOFF2로 변환해 `fonts/`에 포함하고 `@font-face`로 로드합니다. 라이선스는 배포처 정책을 따르세요.
 
 ## 커스터마이징 가이드
 

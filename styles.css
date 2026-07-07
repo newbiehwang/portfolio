@@ -1,3 +1,26 @@
+/* ===== Self-hosted font: tvN 즐거운이야기 ===== */
+@font-face {
+  font-family: 'tvN Enjoy Stories';
+  src: url('fonts/tvn-enjoystories-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'tvN Enjoy Stories';
+  src: url('fonts/tvn-enjoystories-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'tvN Enjoy Stories';
+  src: url('fonts/tvn-enjoystories-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ===== Notebook / ballpoint-pen theme ===== */
 :root {
   --paper: #faf8ef;
@@ -13,9 +36,9 @@
   --radius: 255px 12px 225px 15px / 15px 225px 15px 255px; /* hand-drawn box */
   --radius-alt: 15px 225px 15px 255px / 255px 15px 225px 15px;
   --maxw: 1120px;
-  --font: 'Gaegu', 'Caveat', system-ui, sans-serif;
-  --display: 'Gaegu', 'Caveat', cursive;
-  --hand: 'Caveat', 'Gaegu', cursive;
+  --font: 'tvN Enjoy Stories', system-ui, sans-serif;
+  --display: 'tvN Enjoy Stories', system-ui, sans-serif;
+  --hand: 'tvN Enjoy Stories', system-ui, sans-serif;
   --mono: 'Courier New', ui-monospace, monospace;
   /* hand-drawn red squiggle underline */
   --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='10' viewBox='0 0 120 10'%3E%3Cpath d='M2 6 Q 15 1 30 5 T 60 5 T 90 5 T 118 5' fill='none' stroke='%23c0392b' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
