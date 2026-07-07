@@ -1,6 +1,3 @@
-// Year in footer
-document.getElementById('year').textContent = new Date().getFullYear();
-
 // Navbar scroll state
 const navbar = document.getElementById('navbar');
 const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 20);
