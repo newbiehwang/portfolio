@@ -210,6 +210,14 @@
           <div class="tags">
             <span>AWS</span><span>Serverless</span><span>MCP</span><span>AI/ML</span>
           </div>
+          <template class="project-detail">
+            <ul>
+              <li><strong>개요</strong> — AWS 기반 클라우드 운영을 자동화하는 서버리스 AIOps 에이전트 플랫폼.</li>
+              <li>Streamable-HTTP 프로토콜과 Serverless를 결합한 <strong>MCP 서버</strong>를 구성해, LLM 에이전트가 CloudWatch 로그·Athena 쿼리 등 운영 데이터를 자연어로 조회·분석.</li>
+              <li>Amazon API Gateway + Lambda(멀티 함수) + Bedrock을 활용한 클라우드 네이티브 아키텍처.</li>
+              <li><strong>아주대 2025-1 캡스톤디자인 장려상</strong> 수상, SW중심대학 연합 SW 페스티벌에서 스타트업 대표 대상 시연.</li>
+            </ul>
+          </template>
         </article>
 
         <article class="project-card">
@@ -222,6 +230,15 @@
           <div class="tags">
             <span>ARIS</span><span>JavaScript</span><span>REST API</span><span>Web</span>
           </div>
+          <template class="project-detail">
+            <ul>
+              <li><strong>개요</strong> — LG Entrue의 차세대 <strong>AX PI 방법론</strong>을 함께 기획하고 ARIS 솔루션으로 구현.</li>
+              <li>ARIS 솔루션 커스터마이징 및 <strong>ARIS JavaScript 보고서</strong> 기능 개발.</li>
+              <li>웹 애플리케이션을 <strong>ARIS REST API</strong>와 연동해 추진 계획서 관리 등 기능 구현.</li>
+              <li>1·2차 교육에 <strong>Facilitator</strong>로 참여해 컨설턴트 질의 응답 및 버그 실시간 수정.</li>
+              <li>LG화학·LG생활건강에서 긍정 평가, <strong>LG화학에 채택</strong>되어 계열사 확대 진행 중.</li>
+            </ul>
+          </template>
         </article>
 
         <article class="project-card">
@@ -234,6 +251,14 @@
           <div class="tags">
             <span>AI/ML</span><span>Security</span><span>OSINT</span>
           </div>
+          <template class="project-detail">
+            <ul>
+              <li><strong>개요</strong> — AI로 사이버 위협 인텔리전스(CTI)를 수집·프로파일링하는 자동화 시스템.</li>
+              <li>타겟(도메인·계정 등)을 OSINT로 수집하고 <strong>웹페이지 분석</strong>으로 GitHub 등 계정·연락처 노출 여부를 프로파일링.</li>
+              <li>AI 어시스턴트(챗봇)로 조사 요청, <strong>위험 수준 판정</strong>, PDF 리포트 생성 및 DB 저장.</li>
+              <li><strong>(주)쿤텍</strong> 협업으로 진행한 2025-2 파란학기 WE-Meet 프로젝트.</li>
+            </ul>
+          </template>
         </article>
 
         <article class="project-card">
@@ -245,6 +270,13 @@
           <div class="tags">
             <span>ARIS</span><span>ERP</span><span>Process Arch.</span>
           </div>
+          <template class="project-detail">
+            <ul>
+              <li><strong>개요</strong> — LG CNS의 <strong>Process Architecture</strong>를 이해하고 ERP PI 시스템을 ARIS 솔루션 기반으로 구축·운영 지원.</li>
+              <li>ERP 프로세스 혁신(PI)을 위한 프로세스 모델링 및 표준화 작업 지원.</li>
+              <li>ARIS 기반 프로세스 아키텍처 운영 지원.</li>
+            </ul>
+          </template>
         </article>
 
         <article class="project-card">
@@ -257,6 +289,14 @@
           <div class="tags">
             <span>Web</span><span>Mobile</span><span>Database</span>
           </div>
+          <template class="project-detail">
+            <ul>
+              <li><strong>개요</strong> — 동아리 운영을 종합 지원하는 관리 서비스.</li>
+              <li>리크루딩 생성·관리, 진행기간/상시지원 설정, <strong>지원폼</strong> 구성, 동아리 소개 페이지 등 모집 전 과정 지원.</li>
+              <li>웹·모바일 UI와 관계형 데이터베이스 설계.</li>
+              <li>2024-2 데이터베이스 과목 팀 프로젝트, <strong>우수 프로젝트 예시 수록</strong>.</li>
+            </ul>
+          </template>
         </article>
       </div>
     </section>
@@ -395,6 +435,20 @@
     <p>Made by Shincheol Hwang (2026)</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Project detail modal -->
+  <div class="modal-overlay" id="projectModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="닫기">&times;</button>
+      <div class="modal-media" id="modalMedia" hidden><img id="modalImg" src="" alt="" /></div>
+      <div class="modal-body">
+        <span class="modal-period" id="modalPeriod"></span>
+        <h3 id="modalTitle"></h3>
+        <div class="tags" id="modalTags"></div>
+        <div class="modal-detail" id="modalDetail"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=2"></script>
 </body>
 </html>
