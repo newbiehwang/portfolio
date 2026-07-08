@@ -28,21 +28,27 @@ const io = new IntersectionObserver(
 );
 targets.forEach((el) => io.observe(el));
 
-// Project detail modal
+// Project detail page — full-screen transition (View Transitions + Back button)
 (function () {
-  const modal = document.getElementById('projectModal');
-  if (!modal) return;
-  const mClose = document.getElementById('modalClose');
+  const page = document.getElementById('projectModal');
+  if (!page) return;
+  const backBtn = document.getElementById('modalClose');
   const mMedia = document.getElementById('modalMedia');
   const mImg = document.getElementById('modalImg');
   const mPeriod = document.getElementById('modalPeriod');
   const mTitle = document.getElementById('modalTitle');
   const mTags = document.getElementById('modalTags');
   const mDetail = document.getElementById('modalDetail');
-  let lastFocused = null;
+  const HERO = 'project-hero';
 
-  function openModal(card) {
-    lastFocused = card;
+  const supportsVT = typeof document.startViewTransition === 'function';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!supportsVT) document.documentElement.classList.add('no-vt');
+
+  let lastCard = null;
+  let isOpen = false;
+
+  function fill(card) {
     mTitle.textContent = card.querySelector('h3').textContent;
     const period = card.querySelector('.project-period');
     mPeriod.textContent = period ? period.textContent : '';
@@ -59,41 +65,78 @@ targets.forEach((el) => io.observe(el));
       mImg.removeAttribute('src');
       mMedia.hidden = true;
     }
-    modal.hidden = false;
-    document.body.classList.add('modal-open');
-    mModalScrollReset();
-    mClose.focus();
   }
 
-  function mModalScrollReset() {
-    const body = modal.querySelector('.modal-body');
-    if (body) body.scrollTop = 0;
+  function transition(mutate) {
+    if (supportsVT && !reduce) return document.startViewTransition(mutate);
+    mutate();
+    return { finished: Promise.resolve() };
   }
 
-  function closeModal() {
-    modal.hidden = true;
-    document.body.classList.remove('modal-open');
-    if (lastFocused) lastFocused.focus();
+  function open(card) {
+    if (isOpen) return;
+    isOpen = true;
+    lastCard = card;
+    const thumb = card.querySelector('.project-thumb img');
+    if (thumb) thumb.style.viewTransitionName = HERO; // source of the morph
+    const t = transition(() => {
+      fill(card);
+      if (thumb && !mMedia.hidden) {
+        thumb.style.viewTransitionName = '';
+        mImg.style.viewTransitionName = HERO; // target of the morph
+      }
+      page.hidden = false;
+      page.scrollTop = 0;
+      document.body.classList.add('modal-open');
+    });
+    history.pushState({ projectPage: true }, '');
+    t.finished.finally(() => {
+      mImg.style.viewTransitionName = '';
+      if (thumb) thumb.style.viewTransitionName = '';
+      backBtn.focus();
+    });
+  }
+
+  function close() {
+    if (!isOpen) return;
+    isOpen = false;
+    const thumb = lastCard && lastCard.querySelector('.project-thumb img');
+    if (!mMedia.hidden) mImg.style.viewTransitionName = HERO; // morph back down
+    const t = transition(() => {
+      page.hidden = true;
+      document.body.classList.remove('modal-open');
+      mImg.style.viewTransitionName = '';
+      if (thumb) thumb.style.viewTransitionName = HERO;
+    });
+    t.finished.finally(() => {
+      if (thumb) thumb.style.viewTransitionName = '';
+      if (lastCard) lastCard.focus();
+    });
+  }
+
+  // Close by going back in history so the browser Back button works too
+  function requestClose() {
+    if (history.state && history.state.projectPage) history.back();
+    else close();
   }
 
   document.querySelectorAll('.project-card').forEach((card) => {
     card.tabIndex = 0;
-    card.setAttribute('role', 'button');
-    card.setAttribute('aria-haspopup', 'dialog');
-    card.addEventListener('click', () => openModal(card));
+    card.setAttribute('role', 'link');
+    card.addEventListener('click', () => open(card));
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        openModal(card);
+        open(card);
       }
     });
   });
 
-  mClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
+  backBtn.addEventListener('click', requestClose);
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal.hidden) closeModal();
+    if (e.key === 'Escape' && isOpen) requestClose();
+  });
+  window.addEventListener('popstate', () => {
+    if (isOpen) close();
   });
 })();
