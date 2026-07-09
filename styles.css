@@ -356,8 +356,15 @@ main { width: 100%; }
     linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
   background-size: 26px 26px;
   overflow-y: auto;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.34s ease, transform 0.34s ease;
 }
 .project-page[hidden] { display: none; }
+.project-page.is-open { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .project-page { transform: none; transition: opacity 0.2s ease; }
+}
 .page-topbar {
   position: sticky; top: 0; z-index: 4;
   background: rgba(246, 247, 250, 0.92);
@@ -409,23 +416,6 @@ body.modal-open { overflow: hidden; }
 }
 .star-text p { color: var(--ink); font-size: 1.18rem; line-height: 1.55; }
 
-/* Directional slide page transition (View Transitions API) */
-@media (prefers-reduced-motion: no-preference) {
-  /* opening: detail slides in from the right, list parallax-slides left */
-  html[data-vt="open"]::view-transition-new(root) { animation: vtSlideFromRight 0.42s cubic-bezier(.33, 0, .1, 1) both; }
-  html[data-vt="open"]::view-transition-old(root) { animation: vtPushToLeft 0.42s cubic-bezier(.33, 0, .1, 1) both; }
-  /* closing: detail slides out to the right (on top), list parallax-slides back in */
-  html[data-vt="close"]::view-transition-old(root) { z-index: 5; animation: vtSlideToRight 0.4s cubic-bezier(.33, 0, .1, 1) both; }
-  html[data-vt="close"]::view-transition-new(root) { animation: vtPullFromLeft 0.4s cubic-bezier(.33, 0, .1, 1) both; }
-}
-@keyframes vtSlideFromRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
-@keyframes vtPushToLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-22%); opacity: 0.6; } }
-@keyframes vtSlideToRight { from { transform: translateX(0); } to { transform: translateX(100%); } }
-@keyframes vtPullFromLeft { from { transform: translateX(-22%); opacity: 0.6; } to { transform: translateX(0); opacity: 1; } }
-
-/* Fallback slide when View Transitions are unsupported */
-.no-vt .project-page:not([hidden]) { animation: pageSlideIn 0.36s cubic-bezier(.33, 0, .1, 1); }
-@keyframes pageSlideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
 /* ===== Activities ===== */
 .activity-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }

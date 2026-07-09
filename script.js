@@ -28,7 +28,7 @@ const io = new IntersectionObserver(
 );
 targets.forEach((el) => io.observe(el));
 
-// Project detail page — full-screen transition (View Transitions + Back button)
+// Project detail page — gentle fade in/out + Back button
 (function () {
   const page = document.getElementById('projectModal');
   if (!page) return;
@@ -40,12 +40,10 @@ targets.forEach((el) => io.observe(el));
   const mTags = document.getElementById('modalTags');
   const mDetail = document.getElementById('modalDetail');
 
-  const supportsVT = typeof document.startViewTransition === 'function';
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!supportsVT) document.documentElement.classList.add('no-vt');
-
   let lastCard = null;
   let isOpen = false;
+  let closeTimer = null;
 
   function fill(card) {
     mTitle.textContent = card.querySelector('h3').textContent;
@@ -66,42 +64,36 @@ targets.forEach((el) => io.observe(el));
     }
   }
 
-  function transition(mutate) {
-    if (supportsVT && !reduce) return document.startViewTransition(mutate);
-    mutate();
-    return { finished: Promise.resolve() };
-  }
-
+  // Gentle fade/appear — animates only the detail page element, so it never
+  // clashes with the page's scroll-reveal or the fixed navbar.
   function open(card) {
     if (isOpen) return;
     isOpen = true;
     lastCard = card;
-    document.documentElement.dataset.vt = 'open';
-    const t = transition(() => {
-      fill(card);
-      page.hidden = false;
-      page.scrollTop = 0;
-      document.body.classList.add('modal-open');
-    });
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    fill(card);
+    page.hidden = false;
+    page.scrollTop = 0;
+    document.body.classList.add('modal-open');
+    // flush the opacity:0 start state (reflow) so adding the class transitions in
+    void page.offsetHeight;
+    page.classList.add('is-open');
     history.pushState({ projectPage: true }, '');
-    t.finished.finally(() => {
-      delete document.documentElement.dataset.vt;
-      backBtn.focus();
-    });
+    backBtn.focus();
   }
 
   function close() {
     if (!isOpen) return;
     isOpen = false;
-    document.documentElement.dataset.vt = 'close';
-    const t = transition(() => {
+    page.classList.remove('is-open');
+    const finish = () => {
+      closeTimer = null;
       page.hidden = true;
       document.body.classList.remove('modal-open');
-    });
-    t.finished.finally(() => {
-      delete document.documentElement.dataset.vt;
       if (lastCard) lastCard.focus();
-    });
+    };
+    if (reduce) { finish(); return; }
+    closeTimer = setTimeout(finish, 360); // matches CSS fade duration
   }
 
   // Close by going back in history so the browser Back button works too
