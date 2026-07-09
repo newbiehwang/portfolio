@@ -385,21 +385,47 @@ main { width: 100%; }
 .page-inner .modal-period { font-family: var(--hand); font-weight: 700; color: var(--ink-red); font-size: 1.1rem; }
 .page-inner h3 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 4.5vw, 2.8rem); color: var(--ink-blue); line-height: 1.1; margin: 4px 0 16px; }
 .page-inner .tags { margin-bottom: 4px; }
-.modal-detail { margin-top: 22px; }
-.modal-detail ul { list-style: none; display: flex; flex-direction: column; gap: 13px; }
-.modal-detail li { position: relative; padding-left: 24px; color: var(--ink); font-size: 1.2rem; line-height: 1.55; }
-.modal-detail li::before { content: '✓'; position: absolute; left: 0; color: var(--ink-blue); font-weight: 700; }
+.modal-detail { margin-top: 24px; }
 .modal-detail strong { color: var(--ink-red); font-weight: 700; }
 body.modal-open { overflow: hidden; }
 
-/* View Transition timing for the shared hero morph */
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-group(project-hero) { animation-duration: 0.42s; animation-timing-function: cubic-bezier(.3, .8, .3, 1); }
-  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.32s; }
+/* STAR blocks */
+.star { display: flex; flex-direction: column; gap: 20px; }
+.star-item { display: flex; gap: 16px; align-items: flex-start; }
+.star-badge {
+  flex-shrink: 0; width: 46px; height: 46px; border-radius: 13px;
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 1.7rem;
+  color: #fff; box-shadow: 0 3px 8px -2px rgba(30, 40, 70, 0.35);
 }
-/* Fallback animation when View Transitions are unsupported */
-.no-vt .project-page:not([hidden]) { animation: pageFallback 0.32s ease; }
-@keyframes pageFallback { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.sb-s { background: #2f52b0; }
+.sb-t { background: #218a86; }
+.sb-a { background: #c98a2b; }
+.sb-r { background: #c0392b; }
+.star-text { padding-top: 1px; }
+.star-text h4 {
+  font-family: var(--hand); font-weight: 700; font-size: 1.15rem;
+  color: var(--ink-soft); letter-spacing: 0.02em; margin-bottom: 2px;
+}
+.star-text p { color: var(--ink); font-size: 1.18rem; line-height: 1.55; }
+
+/* Directional slide page transition (View Transitions API) */
+@media (prefers-reduced-motion: no-preference) {
+  /* opening: detail slides in from the right, list parallax-slides left */
+  html[data-vt="open"]::view-transition-new(root) { animation: vtSlideFromRight 0.42s cubic-bezier(.33, 0, .1, 1) both; }
+  html[data-vt="open"]::view-transition-old(root) { animation: vtPushToLeft 0.42s cubic-bezier(.33, 0, .1, 1) both; }
+  /* closing: detail slides out to the right (on top), list parallax-slides back in */
+  html[data-vt="close"]::view-transition-old(root) { z-index: 5; animation: vtSlideToRight 0.4s cubic-bezier(.33, 0, .1, 1) both; }
+  html[data-vt="close"]::view-transition-new(root) { animation: vtPullFromLeft 0.4s cubic-bezier(.33, 0, .1, 1) both; }
+}
+@keyframes vtSlideFromRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes vtPushToLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-22%); opacity: 0.6; } }
+@keyframes vtSlideToRight { from { transform: translateX(0); } to { transform: translateX(100%); } }
+@keyframes vtPullFromLeft { from { transform: translateX(-22%); opacity: 0.6; } to { transform: translateX(0); opacity: 1; } }
+
+/* Fallback slide when View Transitions are unsupported */
+.no-vt .project-page:not([hidden]) { animation: pageSlideIn 0.36s cubic-bezier(.33, 0, .1, 1); }
+@keyframes pageSlideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
 /* ===== Activities ===== */
 .activity-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }

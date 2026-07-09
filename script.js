@@ -39,7 +39,6 @@ targets.forEach((el) => io.observe(el));
   const mTitle = document.getElementById('modalTitle');
   const mTags = document.getElementById('modalTags');
   const mDetail = document.getElementById('modalDetail');
-  const HERO = 'project-hero';
 
   const supportsVT = typeof document.startViewTransition === 'function';
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -77,22 +76,16 @@ targets.forEach((el) => io.observe(el));
     if (isOpen) return;
     isOpen = true;
     lastCard = card;
-    const thumb = card.querySelector('.project-thumb img');
-    if (thumb) thumb.style.viewTransitionName = HERO; // source of the morph
+    document.documentElement.dataset.vt = 'open';
     const t = transition(() => {
       fill(card);
-      if (thumb && !mMedia.hidden) {
-        thumb.style.viewTransitionName = '';
-        mImg.style.viewTransitionName = HERO; // target of the morph
-      }
       page.hidden = false;
       page.scrollTop = 0;
       document.body.classList.add('modal-open');
     });
     history.pushState({ projectPage: true }, '');
     t.finished.finally(() => {
-      mImg.style.viewTransitionName = '';
-      if (thumb) thumb.style.viewTransitionName = '';
+      delete document.documentElement.dataset.vt;
       backBtn.focus();
     });
   }
@@ -100,16 +93,13 @@ targets.forEach((el) => io.observe(el));
   function close() {
     if (!isOpen) return;
     isOpen = false;
-    const thumb = lastCard && lastCard.querySelector('.project-thumb img');
-    if (!mMedia.hidden) mImg.style.viewTransitionName = HERO; // morph back down
+    document.documentElement.dataset.vt = 'close';
     const t = transition(() => {
       page.hidden = true;
       document.body.classList.remove('modal-open');
-      mImg.style.viewTransitionName = '';
-      if (thumb) thumb.style.viewTransitionName = HERO;
     });
     t.finished.finally(() => {
-      if (thumb) thumb.style.viewTransitionName = '';
+      delete document.documentElement.dataset.vt;
       if (lastCard) lastCard.focus();
     });
   }
