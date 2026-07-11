@@ -413,6 +413,11 @@ body.modal-open { overflow: hidden; }
   color: var(--ink-soft); letter-spacing: 0.02em; margin-bottom: 2px;
 }
 .star-text p { color: var(--ink); font-size: 1.18rem; line-height: 1.55; }
+.result-item { margin-top: 20px; }
+.result-item:first-of-type { margin-top: 6px; }
+.result-item h5 { font-family: var(--hand); font-weight: 700; font-size: 1.3rem; color: var(--ink-blue); margin-bottom: 3px; }
+.result-item p { color: var(--ink); font-size: 1.15rem; line-height: 1.55; }
+.result-item strong { color: var(--ink-red); font-weight: 700; }
 .star-text .axpi-gallery + p { margin-top: 18px; }
 .star-text p + p { margin-top: 12px; }
 
