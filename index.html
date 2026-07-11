@@ -238,7 +238,18 @@
             <div class="star">
               <div class="star-item"><div class="star-badge sb-s">S</div><div class="star-text"><h4>Situation</h4><p>LG CNS를 비롯한 대다수의 대기업은 업무에서 사용되는 프로세스에 AX를 도입하기 위해 투자를 아끼지 않는 상황입니다. 이를 위해 기존의 프로세스를 어떻게 AX로 전환할지, 그리고 AI를 통해 어떻게 프로세스를 그려나갈지 정의하는 <strong>방법론</strong>이 절실하였습니다. 저는 인투액션 소속으로서, LG Entrue와 AX PI를 위한 <strong>As-Is와 To-Be 방법론</strong>을 함께 설계했습니다.</p></div></div>
               <div class="star-item"><div class="star-badge sb-t">T</div><div class="star-text"><h4>Task</h4><p>저는 AX PI 방법론을 기반으로 프로세스를 AX로 전환하는 <strong>웹 애플리케이션 개발</strong>을 담당했습니다. 또한, 교육 중 컨설턴트의 질의응답을 담당하고, 버그를 실시간으로 해결하는 <strong>Facilitator</strong> 역할을 맡았습니다. 3월 27일날 프로젝트에 투입되었고, 1차 목표는 <strong>4월 7일</strong> 전까지 ARIS 솔루션을 커스터마이징하여 1차 교육에 제공하는 것이었고, 2차 목표는 단점을 보완하기 위해 웹 애플리케이션을 <strong>4월 24일</strong>까지 자체 제작하여 2차 교육에 제공하는 것이었습니다.</p></div></div>
-              <div class="star-item"><div class="star-badge sb-a">A</div><div class="star-text"><h4>Action</h4><p>[더미] ARIS 커스터마이징과 <strong>JavaScript 보고서</strong>를 개발하고, 웹앱을 ARIS REST API와 연동했으며, 교육에 Facilitator로 참여해 실시간 대응했습니다.</p></div></div>
+              <div class="star-item"><div class="star-badge sb-a">A</div><div class="star-text"><h4>Action</h4>
+                <p>1차 목표를 완수하기 위해, 저는 <strong>ARIS 솔루션의 보고서(백엔드) 기능</strong>을 Javascript 언어로 개발했습니다. 방법론의 진행 단계(추진계획서 생성 → VDT/프로세스 매핑 → 요구수준 분석 → 우선순위 평가 → To-Be 설계)를 단계별로 그대로 따라갈 수 있게 설계했습니다. 후술할 이유로 웹 애플리케이션으로 리펙토링하기 위해, 아래의 ARIS Javascript 보고서 기능은 더 이상 사용하지 않지만, UI와 로직을 설명하기 위해 첨부했습니다.</p>
+                <div class="axpi-slideshow" role="img" aria-label="ARIS Javascript 보고서 UI 화면 슬라이드">
+                  <img class="axpi-slide" src="assets/projects/axpi_01.png" alt="ARIS Javascript 보고서 화면 1" onerror="this.closest('.axpi-slideshow').style.display='none'" />
+                  <img class="axpi-slide" src="assets/projects/axpi_02.png" alt="ARIS Javascript 보고서 화면 2" onerror="this.style.display='none'" />
+                  <img class="axpi-slide" src="assets/projects/axpi_03.png" alt="ARIS Javascript 보고서 화면 3" onerror="this.style.display='none'" />
+                </div>
+                <ul class="axpi-notes">
+                  <li><strong>사업전략 / IT전략 / 기술트렌드</strong> 3축의 전략 트리(Lv1~Lv3)를 트리 UI로 제시하고, 사용자가 선택한 전략 항목을 근거로 <strong>추진계획서</strong>를 생성할 수 있도록 설계했습니다.</li>
+                  <li>ARIS 모델은 개체 정의(<strong>ObjDef</strong>)와 연결(<strong>OccCxn</strong>)으로 이루어져 있어, Lv1의 개체 정의를 읽고 연결을 따라가 Lv3 노드까지 탐색하여 <strong>트리 구조로 재구성</strong>하였습니다.</li>
+                </ul>
+              </div></div>
               <div class="star-item"><div class="star-badge sb-r">R</div><div class="star-text"><h4>Result</h4><p>[더미] LG화학·LG생활건강에서 긍정 평가, <strong>LG화학에 채택</strong>되어 계열사 확대 진행 중입니다.</p></div></div>
             </div>
           </template>
