@@ -453,7 +453,7 @@ body.modal-open { overflow: hidden; }
   .axpi-captions .axpi-notes.active { animation: none; }
 }
 .axpi-notes code {
-  font-family: var(--mono); font-size: 0.9em;
+  font-family: inherit;
   color: var(--ink-red); font-weight: 700;
 }
 .axpi-notes { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
