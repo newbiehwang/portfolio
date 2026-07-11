@@ -416,6 +416,16 @@ body.modal-open { overflow: hidden; }
 .star-text .axpi-gallery + p { margin-top: 18px; }
 .star-text p + p { margin-top: 12px; }
 
+/* Action single image */
+.axpi-figure {
+  margin: 18px 0 4px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--paper-card);
+}
+.axpi-figure img { display: block; width: 100%; }
+
 /* Action image gallery (arrow navigation) */
 .axpi-gallery { margin: 18px 0 4px; }
 .axpi-viewport {

@@ -297,6 +297,14 @@
                   <li>다중 사용자 환경의 번호 중복을 <strong>동시성 제어</strong>로 차단했습니다. Node는 싱글 스레드지만 await 경계에서 다른 요청이 끼어들 수 있어, <strong>AsyncMutex</strong>를 도입하였습니다. 원격 ARIS 조회 지연 중에도 <strong>마지막 발급 번호를 메모리에 유지</strong>해 번호 충돌을 방지했습니다.</li>
                   <li>중복 생성 방지를 위해 <strong>멱등성 계층</strong>을 추가했습니다. 요청 본문 해시 기반 <strong>멱등 키</strong>로 <strong>in_progress / done</strong> 상태를 관리해, 더블 클릭이나 네트워크 재시도로 같은 계획서가 두 번 생성되지 않게 설계했습니다.</li>
                 </ul>
+                <div class="axpi-figure">
+                  <img src="assets/projects/axpi_08.png" alt="매핑 결과 흐름 그래프 화면" onerror="this.closest('.axpi-figure').style.display='none'" />
+                </div>
+                <ul class="axpi-notes">
+                  <li><strong>2단계 위저드(VDT 선택 → 프로세스 매핑)</strong>로 분리해, 데스크톱의 3분할 리스트를 선택 흐름에 맞게 재배치했습니다.</li>
+                  <li>매핑 결과를 <strong>좌우 흐름 그래프</strong>로 시각화했습니다. Lv1→Lv2→Lv3 VDT→프로세스의 <strong>4열 구조</strong>를 <strong>베지어 곡선</strong>으로 연결하고, 계층에 따라 노드 색상 농도를 달리해 한눈에 읽히도록 설계했습니다.</li>
+                  <li>저장은 <strong>3단계 파이프라인</strong>(매핑 저장 → KPI 다이어그램에 연결선 자동 생성 → ARIS 리포트 원격 실행)으로 진행되어, 웹에서의 변경사항이 <strong>ARIS 서버에 즉시 반영</strong>됩니다.</li>
+                </ul>
               </div></div>
               <div class="star-item"><div class="star-badge sb-r">R</div><div class="star-text"><h4>Result</h4><p>[더미] LG화학·LG생활건강에서 긍정 평가, <strong>LG화학에 채택</strong>되어 계열사 확대 진행 중입니다.</p></div></div>
             </div>
