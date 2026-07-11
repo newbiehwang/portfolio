@@ -240,13 +240,38 @@
               <div class="star-item"><div class="star-badge sb-t">T</div><div class="star-text"><h4>Task</h4><p>저는 AX PI 방법론을 기반으로 프로세스를 AX로 전환하는 <strong>웹 애플리케이션 개발</strong>을 담당했습니다. 또한, 교육 중 컨설턴트의 질의응답을 담당하고, 버그를 실시간으로 해결하는 <strong>Facilitator</strong> 역할을 맡았습니다. 3월 27일날 프로젝트에 투입되었고, 1차 목표는 <strong>4월 7일</strong> 전까지 ARIS 솔루션을 커스터마이징하여 1차 교육에 제공하는 것이었고, 2차 목표는 단점을 보완하기 위해 웹 애플리케이션을 <strong>4월 24일</strong>까지 자체 제작하여 2차 교육에 제공하는 것이었습니다.</p></div></div>
               <div class="star-item"><div class="star-badge sb-a">A</div><div class="star-text"><h4>Action</h4>
                 <p>1차 목표를 완수하기 위해, 저는 <strong>ARIS 솔루션의 보고서(백엔드) 기능</strong>을 Javascript 언어로 개발했습니다. 방법론의 진행 단계(추진계획서 생성 → VDT/프로세스 매핑 → 요구수준 분석 → 우선순위 평가 → To-Be 설계)를 단계별로 그대로 따라갈 수 있게 설계했습니다. 후술할 이유로 웹 애플리케이션으로 리펙토링하기 위해, 아래의 ARIS Javascript 보고서 기능은 더 이상 사용하지 않지만, UI와 로직을 설명하기 위해 첨부했습니다.</p>
-                <div class="axpi-figure">
-                  <img src="assets/projects/axpi_01.png" alt="ARIS Javascript 보고서 화면" onerror="this.closest('.axpi-figure').style.display='none'" />
+                <div class="axpi-gallery">
+                  <div class="axpi-viewport">
+                    <div class="axpi-track">
+                      <div class="axpi-frame"><img src="assets/projects/axpi_01.png" alt="추진 배경 정의 · 전략 트리 화면" onerror="this.style.display='none'" /></div>
+                      <div class="axpi-frame"><img src="assets/projects/axpi_02.png" alt="VDT / 프로세스 매핑 화면" onerror="this.style.display='none'" /></div>
+                      <div class="axpi-frame"><img src="assets/projects/axpi_03.png" alt="우선순위 평가 화면" onerror="this.style.display='none'" /></div>
+                    </div>
+                    <button type="button" class="axpi-arrow axpi-prev" aria-label="이전 화면">&larr;</button>
+                    <button type="button" class="axpi-arrow axpi-next" aria-label="다음 화면">&rarr;</button>
+                  </div>
+                  <div class="axpi-dots">
+                    <button type="button" class="axpi-dot" aria-label="1번 화면"></button>
+                    <button type="button" class="axpi-dot" aria-label="2번 화면"></button>
+                    <button type="button" class="axpi-dot" aria-label="3번 화면"></button>
+                  </div>
+                  <div class="axpi-captions">
+                    <ul class="axpi-notes">
+                      <li><strong>사업전략 / IT전략 / 기술트렌드</strong> 3축의 전략 트리(Lv1~Lv3)를 트리 UI로 제시하고, 사용자가 선택한 전략 항목을 근거로 <strong>추진계획서</strong>를 생성할 수 있도록 설계했습니다.</li>
+                      <li>ARIS 모델은 개체 정의(<strong>ObjDef</strong>)와 연결(<strong>OccCxn</strong>)으로 이루어져 있어, Lv1의 개체 정의를 읽고 연결을 따라가 Lv3 노드까지 탐색하여 <strong>트리 구조로 재구성</strong>하였습니다.</li>
+                    </ul>
+                    <ul class="axpi-notes">
+                      <li>VDT 목록은 <strong>KPI 트리 모델에서 Lv1~Lv3 심볼로 추출</strong>하여 출력하게 설계했습니다.</li>
+                      <li>프로세스 목록은 <strong>프로세스 루트 그룹을 순회하는 알고리즘</strong>을 구현하여 출력했습니다.</li>
+                      <li>매핑 현황은 현재 추진계획서의 기존 연결 구조를 <strong>역파싱</strong>해 출력합니다. <code>ObjOcc.getConnectedObjOccs()</code>로 인접 개체를 수집하고, <code>model.CxnOccList()</code>으로 연결의 타입과 방향을 구분하며 순회하는 구조로 설계했습니다.</li>
+                    </ul>
+                    <ul class="axpi-notes">
+                      <li><strong>3개 영역 8개 항목</strong>(실행 복잡성 / 중요도 / 잠재효과성)의 평가 체계를 테이블로 구성하고, 각 항목의 0~3점을 <strong>서술형 기준</strong>(예: <code>3점: 전사/핵심 밸류체인 영향</code>)으로 선택하게 해 평가자 간 편차를 줄였습니다.</li>
+                      <li>ARIS Table이 셀 드롭다운을 지원하지 않아, <strong>테이블과 드롭다운을 분리 배치하고 행 피치를 계산해 정렬</strong>시키는 방식으로 UI를 구현했습니다.</li>
+                      <li>8개 항목을 <strong>실행 축 / 효과 축 2개로 그룹 평균해 10점 만점으로 정규화</strong>하고, 5점 기준 <strong>사분면 판정</strong>(전략 / 중점 / 중장기 검토 / 후보 영역)을 자동 산출하도록 설계했습니다.</li>
+                    </ul>
+                  </div>
                 </div>
-                <ul class="axpi-notes">
-                  <li><strong>사업전략 / IT전략 / 기술트렌드</strong> 3축의 전략 트리(Lv1~Lv3)를 트리 UI로 제시하고, 사용자가 선택한 전략 항목을 근거로 <strong>추진계획서</strong>를 생성할 수 있도록 설계했습니다.</li>
-                  <li>ARIS 모델은 개체 정의(<strong>ObjDef</strong>)와 연결(<strong>OccCxn</strong>)으로 이루어져 있어, Lv1의 개체 정의를 읽고 연결을 따라가 Lv3 노드까지 탐색하여 <strong>트리 구조로 재구성</strong>하였습니다.</li>
-                </ul>
               </div></div>
               <div class="star-item"><div class="star-badge sb-r">R</div><div class="star-text"><h4>Result</h4><p>[더미] LG화학·LG생활건강에서 긍정 평가, <strong>LG화학에 채택</strong>되어 계열사 확대 진행 중입니다.</p></div></div>
             </div>
@@ -462,6 +487,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=5"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>

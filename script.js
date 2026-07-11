@@ -45,6 +45,31 @@ targets.forEach((el) => io.observe(el));
   let isOpen = false;
   let closeTimer = null;
 
+  // Wire up any image gallery inside freshly-injected detail content
+  function initGalleries(root) {
+    root.querySelectorAll('.axpi-gallery').forEach((g) => {
+      const track = g.querySelector('.axpi-track');
+      const frames = g.querySelectorAll('.axpi-frame');
+      const dots = g.querySelectorAll('.axpi-dot');
+      const notes = g.querySelectorAll('.axpi-captions .axpi-notes');
+      const n = frames.length;
+      if (!n || !track) return;
+      let i = 0;
+      const render = () => {
+        track.style.transform = 'translateX(' + (-i * 100) + '%)';
+        dots.forEach((d, k) => d.classList.toggle('active', k === i));
+        notes.forEach((u, k) => u.classList.toggle('active', k === i));
+      };
+      const go = (d) => { i = (i + d + n) % n; render(); };
+      const prev = g.querySelector('.axpi-prev');
+      const next = g.querySelector('.axpi-next');
+      if (prev) prev.addEventListener('click', () => go(-1));
+      if (next) next.addEventListener('click', () => go(1));
+      dots.forEach((d, k) => d.addEventListener('click', () => { i = k; render(); }));
+      render();
+    });
+  }
+
   function fill(card) {
     mTitle.textContent = card.querySelector('h3').textContent;
     const period = card.querySelector('.project-period');
@@ -53,6 +78,7 @@ targets.forEach((el) => io.observe(el));
     mTags.innerHTML = tags ? tags.innerHTML : '';
     const detail = card.querySelector('.project-detail');
     mDetail.innerHTML = detail ? detail.innerHTML : '';
+    initGalleries(mDetail);
     const thumb = card.querySelector('.project-thumb img');
     if (thumb) {
       mImg.src = thumb.src;
